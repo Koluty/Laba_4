@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Laba_4.Interface;
+using System;
 
 namespace Laba_4
 {
-    public class IsoscelesTrapezium : Rectangle
+    public class IsoscelesTrapezium : Point, IRectangle
     {
-        public IsoscelesTrapezium((double x, double y) a, (double x, double y) b, (double x, double y) c, (double x, double y) d, string color) : base(a, b, c, d, color)
+        public IsoscelesTrapezium((double x, double y) a, (double x, double y) b, (double x, double y) c, (double x, double y) d, string color) : base(a, b, c, d)
         {
             double AB = Length(A, B);
             double BC = Length(B, C);
@@ -20,7 +21,9 @@ namespace Laba_4
                 throw new ArgumentException("The provided points do not form an isosceles trapezium.");
             }
         }
-        public override double Area()
+        public string Color { get; set; }
+        public double Length((double x, double y) a, (double x, double y) b) => (double)(Math.Sqrt(Math.Pow(b.x - a.x, 2) + Math.Pow(b.y - a.y, 2)));
+        public double Area()
         {
             double UpperВase = Length(A, B);
             double LowerВase = Length(D, C);
@@ -31,7 +34,7 @@ namespace Laba_4
             double h = Math.Sqrt(Math.Pow(LeftLateral, 2) - Math.Pow((UpperВase - LowerВase) / 2, 2));
             return 0.5 * (UpperВase + LowerВase) * h;
         }
-        public override double Perimeter()
+        public double Perimeter()
         {
             double UpperВase = Length(A, B);
             double LowerВase = Length(D, C);
@@ -40,6 +43,10 @@ namespace Laba_4
             double RightLateral = Length(B, C);
 
             return UpperВase + LowerВase + LeftLateral + RightLateral;
+        }
+        public void ChangeColor(string newColor)
+        {
+            Color = newColor;
         }
     }
 }

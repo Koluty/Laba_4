@@ -109,7 +109,6 @@ namespace Unit_TDD
             Assert.AreEqual(rec.C, (5, 3));
             Assert.AreEqual(rec.D, (5, -1));
         }
-
         [TestMethod]
         public void RectangleChangeRotate()
         {
